@@ -36,7 +36,7 @@ const EditProfile = () => {
         {
           bio : bio,
           name : name
-        }
+        },{ withCredentials: true }
       );
       toast.success(res.data.message);
       dispatch(updateProfile(res.data.user));

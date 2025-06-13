@@ -25,7 +25,7 @@ const Login = () => {
       const response = await axios.post(LOGIN, {
         email,
         password,
-      });
+      },{ withCredentials: true });
       console.log(response);
       toast.success(response.data.message);
       setTimeout(() => {

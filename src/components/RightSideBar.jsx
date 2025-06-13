@@ -35,7 +35,7 @@ const RightSideBar = () => {
   };
 
   return (
-    <div className="hidden lg:block w-[31%] p-4 pl-7 text-white flex flex-col items-center bg-[#16181C]">
+    <div className="hidden lg:flex w-[31%] p-4 pl-7 text-white flex-col items-center bg-[#16181C]">
       <div className="w-full max-w-xs flex flex-col gap-4">
         {/* Search Bar */}
         <div className="bg-black border-gray-700 border-2 rounded-full px-4 py-2 flex items-center">

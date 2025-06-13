@@ -17,7 +17,7 @@ const TweetInput = () => {
 
   const handlePost = async () => {
     try {
-      const res = await axios.post(CREATE_TWEET, { description });
+      const res = await axios.post(CREATE_TWEET, { description },{ withCredentials: true });
       toast.success(res.data.message);
       dispatch(toggleRefresh());
     } catch (err) {

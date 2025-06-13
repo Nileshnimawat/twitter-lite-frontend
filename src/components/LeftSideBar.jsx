@@ -1,27 +1,22 @@
-import {Home,Search,Bell,Users,User,MoreHorizontal,} from "lucide-react";
-import { 
-  useSelector, 
-  useNavigate, 
-  toast, 
-  axios } from "../utility/libs";
+import { Home, Search, Bell, Users, User, MoreHorizontal } from "lucide-react";
+import { useSelector, useNavigate, toast, axios } from "../utility/libs";
 
 import { LOGOUT } from "../utility/constants";
 
-
-const LeftSideBar = ({isOpen, setIsOpen}) => {
+const LeftSideBar = ({ isOpen, setIsOpen }) => {
   const user = useSelector((state) => state.users.user);
   const navigate = useNavigate();
 
-  const handleLogout = async()=>{
+  const handleLogout = async () => {
     try {
-      const res = await axios.post(LOGOUT);
+      const res = await axios.post(LOGOUT, {}, { withCredentials: true });
       toast.success(res.data.message);
       console.log(res);
       navigate("/");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-  }
+  };
   const menuItems = [
     {
       name: "Home",
@@ -56,8 +51,13 @@ const LeftSideBar = ({isOpen, setIsOpen}) => {
   ];
 
   return (
-    <div className={isOpen? "w-full ":" hidden  xl:w-[22%] h-screen md:flex flex-col justify-between p-5 text-white bg-[#16181C] border-gray-700 border-r-2   "}>
-    
+    <div
+      className={
+        isOpen
+          ? "w-full "
+          : " hidden  xl:w-[22%] h-screen md:flex flex-col justify-between p-5 text-white bg-[#16181C] border-gray-700 border-r-2   "
+      }
+    >
       <div className="text-white   border-gray-700">
         <div className="hidden xl:block text-3xl font-bold mb-6 ">X</div>
         {menuItems.map((item) => (
@@ -67,12 +67,21 @@ const LeftSideBar = ({isOpen, setIsOpen}) => {
             onClick={item.onClick}
           >
             {item.icon}
-            <span onClick={()=>setIsOpen(!isOpen)} className=" xl:block text-xl font-bold">{item.name}</span>
+            <span
+              onClick={() => {
+                if (window.innerWidth < 500) {
+                  setIsOpen(!isOpen);
+                }
+              }}
+              className=" xl:block text-xl font-bold"
+            >
+              {item.name}
+            </span>
           </div>
         ))}
         <button
           className="bg-gray-200 text-black py-2 rounded-full w-full mt-4 font-bold hover:text-lg"
-          onClick={ handleLogout}
+          onClick={handleLogout}
         >
           logout
         </button>
@@ -87,7 +96,9 @@ const LeftSideBar = ({isOpen, setIsOpen}) => {
         </div>
         <div className=" lg:block ">
           <div>{user?.name || "Unknown"}</div>
-          <div className="text-sm text-gray-400">{user?.username || "unknown"}</div>
+          <div className="text-sm text-gray-400">
+            {user?.username || "unknown"}
+          </div>
         </div>
       </div>
     </div>

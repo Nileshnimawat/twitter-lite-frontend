@@ -10,7 +10,7 @@ export const handleFollowAndUnfollow = async (loggedInUser, id, dispatch) => {
     if(loggedInUser.following.includes(id)){
       try {
         dispatch(setUnFollow(id));
-        const res = await axios.post(`${UNFOLLOW}/${id}`);
+        const res = await axios.post(`${UNFOLLOW}/${id}`,{},{ withCredentials: true });
         toast.success(res.data.message);
         console.log(res.data);
       } catch (error) {
