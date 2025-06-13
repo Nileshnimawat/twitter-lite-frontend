@@ -9,6 +9,7 @@ import {
 } from "../../utility/libs";
 
 import { updateProfile } from "../../store/users/userSlice";
+import { UPDATE_PROFILE } from "../../utility/constants";
 
 const EditProfile = () => {
   const user = useSelector((state) => state.users.user);
@@ -25,13 +26,13 @@ const EditProfile = () => {
   };
 
   const handleClose = () => {
-    navigate(-1); // go back to /profile
+    navigate(-1); 
   };
 
   const handleSave = async () => {
    
     try {
-      const res = await axios.put("/api/v1/user/updateProfile", 
+      const res = await axios.put(UPDATE_PROFILE, 
         {
           bio : bio,
           name : name

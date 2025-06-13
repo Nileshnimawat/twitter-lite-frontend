@@ -10,6 +10,7 @@ import {
 import { MessageSquare, Heart, HeartOff, Trash2 } from "lucide-react";
 import { toggleTweetLike, deleteTweetById } from "../../store/users/tweetSlice";
 import {setUserLiked} from "../../store/users/userSlice"
+import { DELETE_TWEET, LIKE_DISLIKE } from "../../utility/constants";
 
 const TweetCard = ({tweets}) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const TweetCard = ({tweets}) => {
 
   const handleLiked = async (id) => {
     try {
-      const res = await axios.put(`/api/v1/tweet/LikedorDislike/${id}`);
+      const res = await axios.put(`${LIKE_DISLIKE}/${id}`);
       dispatch(setUserLiked(id));
       dispatch(toggleTweetLike({userId: currentUser._id , tweetId: id}))
       toast.success(res.data.message);
@@ -35,7 +36,7 @@ const TweetCard = ({tweets}) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`/api/v1/tweet/deleteTweet/${id}`);
+      const res = await axios.delete(`${DELETE_TWEET}/${id}`);
       toast.success(res.data.message);
       dispatch(deleteTweetById(id));
     } catch (err) {

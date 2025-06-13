@@ -19,4 +19,9 @@ export const FOLLOW = `${BASE_URL}/api/v1/user/follow`;
 export const UNFOLLOW = `${BASE_URL}/api/v1/user/unfollow`;
 
 export const SEARCH = `${BASE_URL}/api/v1/user/search?query=`;
+export const UPDATE_PROFILE = `${BASE_URL}/api/v1/user/updateProfile`;
+
+export const LIKE_DISLIKE = `${BASE_URL}/api/v1/tweet/LikedorDislike`;
+
+export const DELETE_TWEET = `${BASE_URL}/api/v1/tweet/deleteTweet`
 
