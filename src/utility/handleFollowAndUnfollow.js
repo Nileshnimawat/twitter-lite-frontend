@@ -21,7 +21,7 @@ export const handleFollowAndUnfollow = async (loggedInUser, id, dispatch) => {
     else{
       try {
         dispatch(setFollow(id));
-        const res = await axios.post(`${FOLLOW}/${id}`,{},dispatch(deleteTweetById(id)));
+        const res = await axios.post(`${FOLLOW}/${id}`,{},{ withCredentials: true });
         toast.success(res.data.message);
         console.log(res.data);
       } catch (error) {
