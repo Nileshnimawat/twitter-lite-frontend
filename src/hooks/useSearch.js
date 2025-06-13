@@ -17,8 +17,7 @@ export const useSearch = (query) => {
     setError(null);
 
     try {
-      const res = await axios.get(`${SEARCH}=${encodeURIComponent(query)}`, 
-        { withCredentials: true });
+      const res = await axios.get(`${SEARCH}=${encodeURIComponent(query)}`);
       setResults(res.data.users || []);
     } catch (err) {
       setError(err.response?.data?.message || "Search failed");

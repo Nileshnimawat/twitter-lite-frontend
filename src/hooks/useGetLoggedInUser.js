@@ -11,8 +11,7 @@ export const useGetLoggedInUser = ()=> {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(MY_PROFILE, 
-        { withCredentials: true });
+        const res = await axios.get(MY_PROFILE);
         if (res.data && res.data.user) {
           dispatch(setUser(res.data.user));
         }

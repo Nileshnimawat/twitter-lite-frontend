@@ -9,8 +9,9 @@ Outlet,
 
 const MainFeed = () => {
   const location = useLocation();
+  const loggedInUser = useSelector((state) => state.users.user);
   const tweets = useSelector((state) => state.tweets.userTweets);
-
+  
 
 
   const likedTweets = loggedInUser?.liked || [];

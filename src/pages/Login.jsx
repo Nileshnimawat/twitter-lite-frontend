@@ -25,13 +25,14 @@ const Login = () => {
       const response = await axios.post(LOGIN, {
         email,
         password,
-      },{ withCredentials: true });
+      });
       console.log(response);
       toast.success(response.data.message);
       setTimeout(() => {
         navigate("/tweets");
         window.location.reload();
-      }, 200);
+      }, 100);
+
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Something went wrong");
