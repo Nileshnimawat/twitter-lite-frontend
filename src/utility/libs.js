@@ -65,6 +65,8 @@ import FollowTabs from "../components/FollowTabs"
 import LeftSideBar from "../components/LeftSideBar"
 import Profile from "../components/Profile"
 import RightSideBar from "../components/RightSideBar"
+import Loader from "../components/layout/Loader";
+import NavBar from "../components/NavBar";
 
 export {
   MainLayout,
@@ -75,7 +77,9 @@ export {
   FollowTabs,
   LeftSideBar,
   Profile,
-  RightSideBar
+  RightSideBar,
+  Loader,
+  NavBar
 }
 
 //Custom Pages
