@@ -4,18 +4,14 @@ import {
   TweetInput,
   TweetCard,
 Outlet,
-useNavigate} from "../../utility/libs";
+} from "../../utility/libs";
 
 
 const MainFeed = () => {
   const location = useLocation();
-  const loggedInUser = useSelector((state) => state.users.user);
   const tweets = useSelector((state) => state.tweets.userTweets);
-  const navigate = useNavigate();
 
-  if(!loggedInUser) {
-    navigate("/");
-  }
+
 
   const likedTweets = loggedInUser?.liked || [];
   const liked = tweets?.filter((tweet) => likedTweets.includes(tweet._id)) || [];
