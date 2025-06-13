@@ -14,7 +14,7 @@ const LeftSideBar = ({isOpen, setIsOpen}) => {
 
   const handleLogout = async()=>{
     try {
-      const res = await axios.post(LOGOUT);
+      const res = await axios.post(LOGOUT,{},{ withCredentials: true });
       toast.success(res.data.message);
       console.log(res);
       navigate("/");

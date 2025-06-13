@@ -1,18 +1,17 @@
-import { 
-  useSelector, 
+import {
+  useSelector,
   useDispatch,
-  axios, 
+  axios,
   toast,
   logo,
-    } from "../../utility/libs";
-
+} from "../../utility/libs";
 
 import { MessageSquare, Heart, HeartOff, Trash2 } from "lucide-react";
 import { toggleTweetLike, deleteTweetById } from "../../store/users/tweetSlice";
-import {setUserLiked} from "../../store/users/userSlice"
+import { setUserLiked } from "../../store/users/userSlice";
 import { DELETE_TWEET, LIKE_DISLIKE } from "../../utility/constants";
 
-const TweetCard = ({tweets}) => {
+const TweetCard = ({ tweets }) => {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.users.user);
@@ -25,9 +24,12 @@ const TweetCard = ({tweets}) => {
 
   const handleLiked = async (id) => {
     try {
-      const res = await axios.put(`${LIKE_DISLIKE}/${id}`);
+      const res = await axios.put(
+        `${LIKE_DISLIKE}/${id}`,
+        { withCredentials: true }
+      );
       dispatch(setUserLiked(id));
-      dispatch(toggleTweetLike({userId: currentUser._id , tweetId: id}))
+      dispatch(toggleTweetLike({ userId: currentUser._id, tweetId: id }));
       toast.success(res.data.message);
     } catch (error) {
       toast.error("Failed to update like");
@@ -36,7 +38,11 @@ const TweetCard = ({tweets}) => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`${DELETE_TWEET}/${id}`);
+      const res = await axios.delete(`${DELETE_TWEET}/${id}`, {
+        withCredentials: true,
+        data: {}, 
+      });
+
       toast.success(res.data.message);
       dispatch(deleteTweetById(id));
     } catch (err) {
