@@ -11,7 +11,7 @@ export const useGetAllTweets = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(ALL_USERS_TWEETS);
+        const res = await axios.get(ALL_USERS_TWEETS,{ withCredentials: true });
         if (res.data?.tweets) {
           dispatch(setUserTweets(res.data.tweets));
         }

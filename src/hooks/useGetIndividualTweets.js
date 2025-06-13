@@ -12,7 +12,7 @@ export const useGetIndividualTweets = (id) => {
     if (!id) return; 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${INDIVIDUAL_TWEETS}${id}`);
+        const res = await axios.get(`${INDIVIDUAL_TWEETS}${id}`,{ withCredentials: true });
         if (res.data?.tweets) {
           dispatch(setIndividualTweets(res.data.tweets));
           console.log(res.data.tweets);

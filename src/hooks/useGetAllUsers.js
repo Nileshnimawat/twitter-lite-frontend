@@ -9,7 +9,7 @@ export const useGetAllUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(ALL_OTHER_USERS);
+        const res = await axios.get(ALL_OTHER_USERS,{ withCredentials: true });
         if (res.data && res.data.users) {
           dispatch(setOtherUsers(res.data.users));
         }
