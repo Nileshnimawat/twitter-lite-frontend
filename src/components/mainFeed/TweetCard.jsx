@@ -24,14 +24,14 @@ const TweetCard = ({ tweets }) => {
 
   const handleLiked = async (id) => {
     try {
+      dispatch(setUserLiked(id));
+      dispatch(toggleTweetLike({ userId: currentUser._id, tweetId: id }));
       const res = await axios.put(
         `${LIKE_DISLIKE}/${id}`,
-        {}, 
+        {},
         { withCredentials: true }
       );
 
-      dispatch(setUserLiked(id));
-      dispatch(toggleTweetLike({ userId: currentUser._id, tweetId: id }));
       toast.success(res.data.message);
     } catch (error) {
       toast.error("Failed to update like");
