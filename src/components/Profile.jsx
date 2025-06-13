@@ -14,14 +14,15 @@ const Profile = () => {
   const { id } = useParams();
   useGetIndividualTweets(id); 
   const tweets = useSelector((state) => state.tweets.individualTweets);
-
-  const navigate = useNavigate();
   const users = useSelector((state) => state.users.otherUsers);
   const loggedInUser = useSelector((state) => state.users.user); 
   const allUsers = [...users, loggedInUser].filter(Boolean);
   const user = allUsers.find((u) => u._id === id);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
 
   if (!user) {
     return (

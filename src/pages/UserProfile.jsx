@@ -4,12 +4,18 @@ import {
   MainLayout,
   EditProfile,
   FollowTabs,
-  useParams
+  useParams,
+  useNavigate
  } from "../utility/libs";
 
 const UserProfile = () => {
   const location = useLocation();
   const { id } = useParams();
+    const navigate = useNavigate();
+
+  if(!loggedInUser) {
+    navigate("/");
+  }
 
   return (
     <MainLayout>

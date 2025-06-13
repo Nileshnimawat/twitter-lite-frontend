@@ -26,8 +26,10 @@ const TweetCard = ({ tweets }) => {
     try {
       const res = await axios.put(
         `${LIKE_DISLIKE}/${id}`,
+        {}, 
         { withCredentials: true }
       );
+
       dispatch(setUserLiked(id));
       dispatch(toggleTweetLike({ userId: currentUser._id, tweetId: id }));
       toast.success(res.data.message);
@@ -40,7 +42,7 @@ const TweetCard = ({ tweets }) => {
     try {
       const res = await axios.delete(`${DELETE_TWEET}/${id}`, {
         withCredentials: true,
-        data: {}, 
+        data: {},
       });
 
       toast.success(res.data.message);

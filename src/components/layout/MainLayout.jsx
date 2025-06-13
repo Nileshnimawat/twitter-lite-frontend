@@ -13,6 +13,10 @@ const MainLayout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  if(!user) {
+    navigate("/");
+  }
+
   return (
     <div className="w-full flex flex-col items-center bg-[#16181C]">
       <div className=" sm:hidden w-full flex justify-between p-1 bg-black">
