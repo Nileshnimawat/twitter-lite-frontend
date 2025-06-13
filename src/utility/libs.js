@@ -5,6 +5,7 @@ import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export {
   React,
@@ -16,6 +17,7 @@ export {
   useState,
   useParams,
   NavLink,
+  Navigate
 
 };
 
@@ -68,6 +70,8 @@ import RightSideBar from "../components/RightSideBar"
 import Loader from "../components/layout/Loader";
 import NavBar from "../components/NavBar";
 
+import PrivateRoute from "../components/Security/PrivateRoute";
+
 export {
   MainLayout,
   EditProfile,
@@ -79,7 +83,8 @@ export {
   Profile,
   RightSideBar,
   Loader,
-  NavBar
+  NavBar,
+  PrivateRoute
 }
 
 //Custom Pages
