@@ -10,6 +10,7 @@ import
    } from "../utility/libs";
 
 import { LOGIN } from "../utility/constants";
+import { setUser } from "../store/users/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,10 +29,12 @@ const Login = () => {
       },{ withCredentials: true });
       console.log(response);
       toast.success(response.data.message);
-      setTimeout(() => {
-        navigate("/tweets");
-        window.location.reload();
-      }, 100);
+       dispatch(setUser(response.data.user));
+       navigate("/tweets");
+      // setTimeout(() => {
+      //   navigate("/tweets");
+      //   window.location.reload();
+      // }, 100);
 
     } catch (error) {
       console.log(error);

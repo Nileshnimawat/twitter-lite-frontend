@@ -1,5 +1,5 @@
 import { Home, Search, Bell, Users, User, MoreHorizontal } from "lucide-react";
-import { useSelector, useNavigate, toast, axios } from "../utility/libs";
+import { useSelector, useNavigate, toast, axios, logo } from "../utility/libs";
 
 import { LOGOUT } from "../utility/constants";
 
@@ -55,10 +55,10 @@ const LeftSideBar = ({ isOpen, setIsOpen }) => {
       className={
         isOpen
           ? "w-full "
-          : " hidden  xl:w-[22%] h-screen md:flex flex-col justify-between p-5 text-white bg-[#16181C] border-gray-700 border-r-2   "
+          : " hidden  xl:w-[22%] h-screen md:flex flex-col justify-between p-5 text-white  border-gray-700 border-2 border-t border-b border-l "
       }
     >
-      <div className="text-white   border-gray-700">
+      <div className="text-white ">
         <div className="hidden xl:block text-3xl font-bold mb-6 ">X</div>
         {menuItems.map((item) => (
           <div
@@ -91,8 +91,8 @@ const LeftSideBar = ({ isOpen, setIsOpen }) => {
         className="hidden xl:flex  lg:flex-row  xl:items-center gap-3 p-2 hover:bg-gray-800 rounded cursor-pointer "
         onClick={() => navigate(`/profile/${user._id}`)}
       >
-        <div className="bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center font-bold">
-          {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+        <div className=" flex items-center justify-center ">
+          <img className=" w-11 h-11 rounded-full" src={user?.profileImage || logo} alt="profileImage" />
         </div>
         <div className=" lg:block ">
           <div>{user?.name || "Unknown"}</div>

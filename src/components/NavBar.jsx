@@ -1,4 +1,4 @@
-import { useNavigate, useSelector } from 'react-router-dom';
+import { useNavigate, useSelector } from '../utility/libs';
 const NavBar = ({
     setIsOpen, isOpen
 }) => {

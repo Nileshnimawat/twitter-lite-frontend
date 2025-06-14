@@ -70,7 +70,6 @@ import RightSideBar from "../components/RightSideBar"
 import Loader from "../components/layout/Loader";
 import NavBar from "../components/NavBar";
 
-import PrivateRoute from "../components/Security/PrivateRoute";
 
 export {
   MainLayout,
@@ -84,7 +83,8 @@ export {
   RightSideBar,
   Loader,
   NavBar,
-  PrivateRoute
+
+
 }
 
 //Custom Pages

@@ -1,8 +1,6 @@
 // In App.jsx or a top-level component
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState, useDispatch, axios } from "../utility/libs";
 import { setUser } from "../store/users/userSlice";
-import axios from "axios";
 import { MY_PROFILE } from "../utility/constants";
 
 export const useGetLoggedInUser = ()=> {

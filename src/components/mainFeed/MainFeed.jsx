@@ -26,7 +26,7 @@ const MainFeed = () => {
   );
 
   return (
-    <div className="w-[47%] flex-1  border-gray-700 border-r-2 h-screen overflow-y-auto hide-scrollbar ">
+    <div className="w-[47%] flex-1  border-gray-700 border-2 border-l border-t border-b h-screen overflow-y-auto hide-scrollbar ">
       {location.pathname !== "/liked" && <TweetInput />}
       {location.pathname === "/tweets" && <TweetCard tweets={tweets} />}
       {location.pathname === "/liked" && <TweetCard tweets={liked} />}

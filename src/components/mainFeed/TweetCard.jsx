@@ -4,6 +4,7 @@ import {
   axios,
   toast,
   logo,
+  useNavigate,
 } from "../../utility/libs";
 
 import { MessageSquare, Heart, HeartOff, Trash2 } from "lucide-react";
@@ -13,25 +14,19 @@ import { DELETE_TWEET, LIKE_DISLIKE } from "../../utility/constants";
 
 const TweetCard = ({ tweets }) => {
   const dispatch = useDispatch();
-
   const currentUser = useSelector((state) => state.users.user);
-
+  const allUsers = useSelector((state) => state.users.otherUsers);
+  const navigate = useNavigate();
+  if (!currentUser) return null;
   if (!tweets || tweets.length === 0) {
-    return (
-      <div className="text-center text-gray-400 mt-4">No tweets exist</div>
-    );
+    return <div className="text-center text-gray-400 mt-4">No tweets exist</div>;
   }
 
   const handleLiked = async (id) => {
     try {
       dispatch(setUserLiked(id));
       dispatch(toggleTweetLike({ userId: currentUser._id, tweetId: id }));
-      const res = await axios.put(
-        `${LIKE_DISLIKE}/${id}`,
-        {},
-        { withCredentials: true }
-      );
-
+      const res = await axios.put(`${LIKE_DISLIKE}/${id}`, {}, { withCredentials: true });
       toast.success(res.data.message);
     } catch (error) {
       toast.error("Failed to update like");
@@ -44,7 +39,6 @@ const TweetCard = ({ tweets }) => {
         withCredentials: true,
         data: {},
       });
-
       toast.success(res.data.message);
       dispatch(deleteTweetById(id));
     } catch (err) {
@@ -55,33 +49,47 @@ const TweetCard = ({ tweets }) => {
   return (
     <>
       {tweets.map((tweet) => {
-        const isLiked = tweet.likes?.includes(currentUser?._id);
+        const userId = tweet.userId;
+        const tweetUser = [...allUsers, currentUser].find((u) => u._id === userId);
+        const isLiked = tweet.likes?.includes(currentUser._id);
         const likeCount = tweet.likes?.length || 0;
 
         return (
           <div
             key={tweet._id}
-            className="border-gray-700 border-[1px] p-4 text-white flex flex-col gap-2 rounded-md"
+            className="border-gray-700 border-1 border-l border-r p-4 text-white flex flex-col gap-2 rounded-md"
           >
             <div className="flex justify-between items-center">
-              <div className="flex gap-3 items-center">
-                <img
-                  src={tweet.userDetails?.[0]?.profileImage || logo}
+              <div 
+              className="flex gap-3 items-center">
+                <img onClick={()=>navigate(`/profile/${tweetUser?._id}`)}
+                  src={tweetUser?.profileImage || logo}
                   alt="user"
                   className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
                   <span className="font-bold">
-                    {tweet.userDetails?.[0]?.name || "Unknown User"}
+                    {tweetUser?.name || "Unknown User"}
                   </span>
                   <p className="text-sm text-gray-400">
-                    @{tweet.userDetails?.[0]?.username || "unknown"}
+                    @{tweetUser?.username || "unknown"}
                   </p>
                 </div>
               </div>
             </div>
 
             <p className="text-white">{tweet.description}</p>
+
+            {tweet.image && (
+              <div className="w-full p-4">
+                 <img
+                src={tweet.image}
+                alt="tweet"
+                className="mt-3  max-h-96 w-full h-auto object-cover rounded-4xl border-2 border-gray-700"
+              />
+              </div>
+             
+            )}
 
             <div className="flex justify-between text-gray-500 mt-2 text-sm items-center">
               <div className="flex items-center gap-2">
@@ -102,8 +110,7 @@ const TweetCard = ({ tweets }) => {
                   <span>{likeCount}</span>
                 </button>
 
-                {(tweet.userId === currentUser?._id ||
-                  tweet.userId?._id === currentUser?._id) && (
+                {userId === currentUser._id && (
                   <button
                     onClick={() => handleDelete(tweet._id)}
                     className="text-red-500 hover:underline"
@@ -121,3 +128,4 @@ const TweetCard = ({ tweets }) => {
 };
 
 export default TweetCard;
+

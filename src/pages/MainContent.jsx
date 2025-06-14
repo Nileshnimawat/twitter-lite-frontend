@@ -1,21 +1,13 @@
-import { 
-  useGetAllTweets,
-  MainLayout,
-  MainFeed 
-} from '../utility/libs';
+import { useGetAllTweets, MainLayout, MainFeed } from "../utility/libs";
 
-import LoadingSpinner from '../components/LoadingSpinner'; // Make sure this exists
+import Loader from "../components/layout/Loader";
 
 const MainContent = () => {
   const { loading } = useGetAllTweets();
 
-  return (
-    <MainLayout>
-      {loading ? <LoadingSpinner /> : <MainFeed />}
-    </MainLayout>
-  );
+  useGetAllTweets();
+
+  return <MainLayout>{loading ? <Loader /> : <MainFeed />}</MainLayout>;
 };
 
 export default MainContent;
-
-

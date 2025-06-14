@@ -4,16 +4,18 @@ import {
   useNavigate,
   logo,
   useState,
-  useSearch,
-  useEffect
+  useGetAllUsers,
+  useLocation,
+  useGetAllTweets
 } from "../utility/libs";
 
 import { handleFollowAndUnfollow } from "../utility/handleFollowAndUnfollow";
 
 const RightSideBar = () => {
+  useGetAllUsers();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  
   const data = useSelector((state) => state.users.otherUsers);
    const loggedInUser = useSelector((state) => state.users.user);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,15 +32,22 @@ const RightSideBar = () => {
 
   const visibleUsers = filteredUsers.slice(0, visibleCount);
 
+  const path = location.pathname==="/explore";
+
   const handleShowMore = () => {
     setVisibleCount((prev) => prev + 5);
   };
 
+
+  const handleFollowFollowing = ()=>{
+    
+  }
+
   return (
-    <div className="hidden lg:flex w-[31%] p-4 pl-7 text-white flex-col items-center bg-[#16181C]">
-      <div className="w-full max-w-xs flex flex-col gap-4">
+    <div className={` lg:flex ${path? "w-full":"w-[31%] hidden" } p-4 pl-7 text-white flex-col items-center `}>
+      <div className={`w-full ${path? "max-w-6xl":"max-w-xs" } flex flex-col gap-4`}>
         {/* Search Bar */}
-        <div className="bg-black border-gray-700 border-2 rounded-full px-4 py-2 flex items-center">
+        <div className={`bg-black border-gray-700 border-2 rounded-full px-4 py-2 flex items-center ${path? "lg:w-90": " w-full"}`}>
           <svg
             className="w-6 h-6 text-gray-400 mr-3"
             fill="none"
@@ -65,17 +74,17 @@ const RightSideBar = () => {
         </div>
 
         {/* Who to Follow */}
-        <div className="bg-black text-white p-4 rounded-xl w-full max-w-xs border-gray-700 border-2">
-          <h2 className="text-lg font-bold mb-4">Who to follow</h2>
+        <div className={`bg-black text-white p-4 rounded-xl ${location.pathname==="/explore"? "w-full":"max-w-xs" } border-gray-700 border-2`}>
+          {location.pathname !=="/explore" && <h2 className={`text-lg font-bold mb-4`}>Who to follow</h2>}
           {visibleUsers.map((user) => (
             <div
               key={user._id}
-              className="flex items-center justify-between mb-5 transition-transform duration-200 transform hover:scale-105"
+              className="flex items-center justify-between mb-5 transition-transform duration-200 transform hover:scale-103"
             >
               <div onClick={() => navigate(`/profile/${user._id}`)}
               className="flex items-center gap-3">
                 <img
-                  src={user.image || logo}
+                  src={user.profileImage || logo}
                   alt={user.name}
                   className="w-10 h-10 rounded-full"
                 />
@@ -90,7 +99,7 @@ const RightSideBar = () => {
               </div>
               <button
                 onClick={() =>
-                  handleFollowAndUnfollow(loggedInUser, user._id, dispatch)
+                  handleFollowAndUnfollow(loggedInUser, user._id, dispatch) 
                 }
                 className="bg-white text-black px-4 py-1 rounded-full text-sm font-semibold"
               >
