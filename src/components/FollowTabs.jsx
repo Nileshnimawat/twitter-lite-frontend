@@ -4,7 +4,8 @@ import {
   useLocation, 
   useNavigate, 
   useSelector,
-  useDispatch } from "../utility/libs";
+  useDispatch, 
+  logo} from "../utility/libs";
 
 const FollowTabs = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const FollowTabs = () => {
   const displayedUsers = allUsers.filter((u) => userIds.includes(u._id));
 
   return (
-    <div className="bg-black text-white p-4 w-[47%] mx-auto border-gray-700  h-screen overflow-y-auto hide-scrollbar">
+    <div className="bg-black text-white p-4 w-full lg:w-[47%]  mx-auto border-gray-700 border-2 border-l border-t border-b h-screen overflow-y-auto hide-scrollbar">
       {/* Tabs */}
       <div className="flex border-b border-gray-700 mb-4">
         <button
@@ -64,7 +65,7 @@ const FollowTabs = () => {
             className="flex items-center gap-4 py-4 border-b border-gray-800 hover:scale-102"
           >
             <img
-              src={user.image || "/default.jpg"}
+              src={user.profileImage || logo}
               alt={user.name}
               className="w-12 h-12 rounded-full object-cover"
             />
