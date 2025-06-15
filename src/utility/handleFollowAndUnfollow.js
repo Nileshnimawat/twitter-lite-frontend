@@ -11,7 +11,7 @@ export const handleFollowAndUnfollow = async (loggedInUser, id, dispatch) => {
     if(loggedInUser.following.includes(id)){
       try {
         dispatch(setUnFollow(id));
-        const res = await axios.post(`${UNFOLLOW}/${id}`,{},{ withCredentials: true });
+        const res = await axios.post(`${UNFOLLOW}/${id}`,{},{ withCredentials: true,skipLoading: true });
         toast.success(res.data.message);
         console.log(res.data);
       } catch (error) {
@@ -22,7 +22,7 @@ export const handleFollowAndUnfollow = async (loggedInUser, id, dispatch) => {
     else{
       try {
         dispatch(setFollow(id));
-        const res = await axios.post(`${FOLLOW}/${id}`,{},{ withCredentials: true });
+        const res = await axios.post(`${FOLLOW}/${id}`,{},{ withCredentials: true,skipLoading: true });
         toast.success(res.data.message);
         console.log(res.data);
       } catch (error) {

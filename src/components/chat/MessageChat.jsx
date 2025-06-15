@@ -41,6 +41,7 @@ const MessageChat = () => {
         { message: sendMessage },
         {
           withCredentials: true,
+           skipLoading: true,
         }
       );
       dispatch(addMessage(res.data.newMessage));
@@ -52,7 +53,7 @@ const MessageChat = () => {
 
   return (
     <div className="w-[90%] lg:w-[65%] flex flex-col h-full border-2 border-gray-700">
-      {/* Header */}
+
       <div className="border-b border-gray-700 p-4">
         <div className="flex items-center gap-4">
           <img
@@ -70,7 +71,6 @@ const MessageChat = () => {
         </div>
       </div>
 
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-2 hide-scrollbar">
         {messages?.map((msg) => (
           <div
@@ -90,7 +90,7 @@ const MessageChat = () => {
         <div ref={scrollRef} />
       </div>
 
-      {/* Input box */}
+
       <form
         onSubmit={(e) => onHandleSubmit(e, user._id)}
         className="border-t border-gray-700 p-4 flex items-center gap-2"
