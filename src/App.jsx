@@ -24,7 +24,9 @@ const App = () => {
   useEffect(() => {
     if (loggedInUser) {
       const socketInstance = io(import.meta.env.VITE_SOCKET_BACKEND_URL, {
+         transports: ["websocket"],
         query: { userId: loggedInUser._id },
+        
       });
 
       dispatch(setSocket(socketInstance));

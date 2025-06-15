@@ -1,4 +1,4 @@
-// In App.jsx or a top-level component
+
 import { useEffect, useState, useDispatch, axios } from "../utility/libs";
 import { setUser } from "../store/users/userSlice";
 import { MY_PROFILE } from "../utility/constants";

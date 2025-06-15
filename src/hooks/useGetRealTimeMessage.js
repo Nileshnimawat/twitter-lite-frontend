@@ -1,5 +1,5 @@
-import { useDispatch, useEffect, useSelector } from '../utility/libs'
-import { addMessage } from '../store/users/messageSlice';
+import { useDispatch, useEffect, useSelector } from "../utility/libs";
+import { addMessage } from "../store/users/messageSlice";
 
 export const useGetRealTimeMessage = () => {
   const socket = useSelector((state) => state.socket.socket);
@@ -9,13 +9,13 @@ export const useGetRealTimeMessage = () => {
     if (!socket) return;
 
     const handleNewMessage = (newMessage) => {
-      dispatch(addMessage(newMessage)); // cleaner and safer than setMessages([...])
+      dispatch(addMessage(newMessage));
     };
 
     socket.on("new-message", handleNewMessage);
 
     return () => {
-      socket.off("new-message", handleNewMessage); // cleanup to avoid multiple listeners
+      socket.off("new-message", handleNewMessage);
     };
   }, [socket, dispatch]);
 };
