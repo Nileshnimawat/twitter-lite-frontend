@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   otherUsers: [],
+  selectedUser:[],
+  onlineUsers:[]
+
 };
 
 const userSlice = createSlice({
@@ -14,6 +17,9 @@ const userSlice = createSlice({
     },
     setOtherUsers(state, action) {
       state.otherUsers = action.payload;
+    },
+    setSelectedUser(state, action) {
+      state.selectedUser = action.payload;
     },
     setFollow(state, action) {
       const id = action.payload;
@@ -42,8 +48,10 @@ const userSlice = createSlice({
       state.user = { ...state.user, ...updatedUser };
     },
 
-    setFollowers(state, action) {},
-    setFollowing(state, action) {},
+    setOnlineUsers(state,action){
+      state.onlineUsers = action.payload;
+    }
+
   },
 });
 
@@ -54,8 +62,9 @@ export const {
   setUnFollow,
   setUserLiked,
   updateProfile,
-  setFollowers,
-  setFollowing,
+  setSelectedUser,
+  setOnlineUsers
+  
 } = userSlice.actions;
 
 export default userSlice.reducer;

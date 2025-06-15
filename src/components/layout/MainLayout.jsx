@@ -2,10 +2,13 @@ import {
   RightSideBar,
   LeftSideBar,
   useState,
-  NavBar
+  NavBar,
+  useLocation,
+  Message
 } from "../../utility/libs";
 
 const MainLayout = ({ children }) => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   
   return (
@@ -14,7 +17,7 @@ const MainLayout = ({ children }) => {
       <div className="bg-black min-h-screen font-sans flex w-full xl:w-[84%]  ">
         <LeftSideBar isOpen={isOpen} setIsOpen={setIsOpen} />
         {children}
-        <RightSideBar />
+        {location.pathname === "/messages"? <Message/>:<RightSideBar/>}
       </div>
     </div>
   );

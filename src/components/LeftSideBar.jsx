@@ -1,17 +1,21 @@
 import { Home, Search, Bell, Users, User, MoreHorizontal } from "lucide-react";
-import { useSelector, useNavigate, toast, axios, logo } from "../utility/libs";
-
+import { useSelector, useNavigate, toast, axios, logo, useLocation, useDispatch } from "../utility/libs";
+import { setUser } from "../store/users/userSlice";
 import { LOGOUT } from "../utility/constants";
 
 const LeftSideBar = ({ isOpen, setIsOpen }) => {
   const user = useSelector((state) => state.users.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname === "/messages"
 
   const handleLogout = async () => {
     try {
       const res = await axios.post(LOGOUT, {}, { withCredentials: true });
       toast.success(res.data.message);
       console.log(res);
+      dispatch(setUser(null));
       navigate("/");
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -29,9 +33,9 @@ const LeftSideBar = ({ isOpen, setIsOpen }) => {
       onClick: () => navigate("/explore"),
     },
     {
-      name: "Notifications",
+      name: "Messages",
       icon: <Bell />,
-      onClick: () => navigate("/notifications"),
+      onClick: () => navigate("/messages"),
     },
     {
       name: "Liked",
@@ -55,7 +59,7 @@ const LeftSideBar = ({ isOpen, setIsOpen }) => {
       className={
         isOpen
           ? "w-full "
-          : " hidden  xl:w-[22%] h-screen md:flex flex-col justify-between p-5 text-white  border-gray-700 border-2 border-t border-b border-l "
+          : ` hidden  xl:w-[22%] ${path ? "xl:w-[27%]":" "} h-screen md:flex flex-col justify-between p-5 text-white  border-gray-700 border-2 border-t border-b border-l `
       }
     >
       <div className="text-white ">

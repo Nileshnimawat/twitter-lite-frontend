@@ -31,10 +31,6 @@ const Login = () => {
       toast.success(response.data.message);
        dispatch(setUser(response.data.user));
        navigate("/tweets");
-      // setTimeout(() => {
-      //   navigate("/tweets");
-      //   window.location.reload();
-      // }, 100);
 
     } catch (error) {
       console.log(error);

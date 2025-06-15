@@ -48,13 +48,17 @@ import { useGetAllUsers } from "../hooks/useGetAllUsers";
 import { useGetIndividualTweets } from "../hooks/useGetIndividualTweets";
 import { useGetLoggedInUser } from "../hooks/useGetLoggedInUser";
 import { useSearch } from "../hooks/useSearch";
+import {useGetMessages} from "../hooks/useGetMessages";
+import { useGetRealTimeMessage } from "../hooks/useGetRealTimeMessage";
 
 export {
     useGetAllTweets,
     useGetAllUsers,
     useGetIndividualTweets,
     useGetLoggedInUser,
-    useSearch
+    useSearch,
+    useGetMessages,
+    useGetRealTimeMessage
 }
 
 //Custom Components
@@ -70,6 +74,10 @@ import RightSideBar from "../components/RightSideBar"
 import Loader from "../components/layout/Loader";
 import NavBar from "../components/NavBar";
 
+//chat component
+import MessageSidebar from "../components/chat/MessageSidebar";
+import MessageChat from "../components/chat/MessageChat";
+import Message from "../components/chat/Message";
 
 export {
   MainLayout,
@@ -83,6 +91,11 @@ export {
   RightSideBar,
   Loader,
   NavBar,
+
+  //chat
+  Message,
+  MessageSidebar,
+  MessageChat
 
 
 }

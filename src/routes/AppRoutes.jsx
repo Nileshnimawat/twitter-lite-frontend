@@ -7,6 +7,7 @@ import {
   MainContent,
   UserProfile,
   MainLayout,
+  Message
 } from "../utility/libs";
 
 const AppRoutes = () => {
@@ -26,7 +27,12 @@ const AppRoutes = () => {
       <Route path="/profile/:id" element={<UserProfile />} />
       <Route path="/:id/followers" element={<UserProfile />} />
       <Route path="/:id/followings" element={<UserProfile />} />
+
+
       <Route path="/explore" element={<MainLayout />} />
+       <Route path="/messages" element={<MainLayout />} />
+
+
 
     </Routes>
   );

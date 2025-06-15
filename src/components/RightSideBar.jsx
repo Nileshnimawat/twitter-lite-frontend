@@ -10,11 +10,13 @@ import {
 } from "../utility/libs";
 
 import { handleFollowAndUnfollow } from "../utility/handleFollowAndUnfollow";
+import { toggleRefresh } from "../store/users/tweetSlice";
 
 const RightSideBar = () => {
   useGetAllUsers();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   
   const data = useSelector((state) => state.users.otherUsers);
    const loggedInUser = useSelector((state) => state.users.user);
@@ -39,9 +41,6 @@ const RightSideBar = () => {
   };
 
 
-  const handleFollowFollowing = ()=>{
-    
-  }
 
   return (
     <div className={` lg:flex ${path? "w-full":"w-[31%] hidden" } p-4 pl-7 text-white flex-col items-center `}>
@@ -68,7 +67,7 @@ const RightSideBar = () => {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setVisibleCount(5); // reset on new search
+              setVisibleCount(5); 
             }}
           />
         </div>
@@ -99,7 +98,7 @@ const RightSideBar = () => {
               </div>
               <button
                 onClick={() =>
-                  handleFollowAndUnfollow(loggedInUser, user._id, dispatch) 
+                  handleFollowAndUnfollow(loggedInUser, user._id, dispatch) && dispatch(toggleRefresh())
                 }
                 className="bg-white text-black px-4 py-1 rounded-full text-sm font-semibold"
               >

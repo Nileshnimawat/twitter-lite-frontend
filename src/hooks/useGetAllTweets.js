@@ -7,6 +7,7 @@ import { ALL_USERS_TWEETS } from "../utility/constants";
 export const useGetAllTweets = () => {
   const dispatch = useDispatch();
   const refreshTrigger = useSelector((state) => state.tweets.refreshTrigger);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

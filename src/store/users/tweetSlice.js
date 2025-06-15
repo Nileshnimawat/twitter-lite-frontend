@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userTweets: [],
   individualTweets: [],
-  refreshTrigger: false, // Make sure this is initialized if you're using it
+  refreshTrigger: false, 
 };
 
 const tweetSlice = createSlice({

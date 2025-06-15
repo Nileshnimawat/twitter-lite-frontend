@@ -1,5 +1,7 @@
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
+export const SOCKET_URL = import.meta.env.SOCKET_BACKEND_URL;
+
 export const ALL_USERS_TWEETS = `${BASE_URL}/api/v1/tweet/getAllTweets`;
 export const ALL_OTHER_USERS = `${BASE_URL}/api/v1/user/getAllUsers`;
 export const CREATE_TWEET = `${BASE_URL}/api/v1/tweet/createTweet`;
@@ -24,4 +26,10 @@ export const UPDATE_PROFILE = `${BASE_URL}/api/v1/user/updateProfile`;
 export const LIKE_DISLIKE = `${BASE_URL}/api/v1/tweet/LikedorDislike`;
 
 export const DELETE_TWEET = `${BASE_URL}/api/v1/tweet/deleteTweet`
+
+
+
+
+export const GET_MESSAGES = `${BASE_URL}/api/v1/message`
+export const SEND_MESSAGE = `${BASE_URL}/api/v1/message/send`
 
