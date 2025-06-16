@@ -1,14 +1,12 @@
 import Loader from "./components/layout/Loader"; // import the loader
 import { useSelector,useGetLoggedInUser,useGetAllUsers,useDispatch
-  ,useEffect, Toaster
+  ,useEffect, Toaster,useNavigate
  } from "./utility/libs"; 
 import AppRoutes from "./routes/AppRoutes";
 import io from "socket.io-client"
 
 import { setSocket } from "./store/users/socketSlice";
 import { setOnlineUsers } from "./store/users/userSlice";
-
-import { SOCKET_URL } from "./utility/constants";
 
 
 
@@ -20,6 +18,14 @@ const App = () => {
   const loggedInUser = useSelector((state) => state.users.user);
   const socket = useSelector((state) => state.socket.socket);
    const loading = useSelector((state) => state.loading.isLoading);
+
+     const navigate = useNavigate();
+
+  useEffect(() => {
+   if(!loggedInUser){
+    navigate("/login");
+   }
+  }, [])
 
   useEffect(() => {
     if (loggedInUser) {

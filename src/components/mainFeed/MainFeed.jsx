@@ -4,13 +4,20 @@ import {
   TweetInput,
   TweetCard,
 Outlet,
+useEffect,
+useNavigate,
 } from "../../utility/libs";
 
 
 const MainFeed = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.users.user);
   const tweets = useSelector((state) => state.tweets.userTweets);
+
+
+
+  
   
 
 

@@ -27,7 +27,7 @@ const TweetCard = ({ tweets }) => {
       dispatch(setUserLiked(id));
       dispatch(toggleTweetLike({ userId: currentUser._id, tweetId: id }));
       const res = await axios.put(`${LIKE_DISLIKE}/${id}`, {}, { withCredentials: true,skipLoading: true });
-      toast.success(res.data.message);
+      // toast.success(res.data.message);
     } catch (error) {
       toast.error("Failed to update like");
     }

@@ -72,7 +72,7 @@ const RightSideBar = () => {
           />
         </div>
 
-        {/* Who to Follow */}
+       
         <div className={`bg-black text-white p-4 rounded-xl ${location.pathname==="/explore"? "w-full":"max-w-xs" } border-gray-700 border-2`}>
           {location.pathname !=="/explore" && <h2 className={`text-lg font-bold mb-4`}>Who to follow</h2>}
           {visibleUsers.map((user) => (

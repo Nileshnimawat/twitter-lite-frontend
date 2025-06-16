@@ -12,7 +12,7 @@ export const handleFollowAndUnfollow = async (loggedInUser, id, dispatch) => {
       try {
         dispatch(setUnFollow(id));
         const res = await axios.post(`${UNFOLLOW}/${id}`,{},{ withCredentials: true,skipLoading: true });
-        toast.success(res.data.message);
+        // toast.success(res.data.message);
         console.log(res.data);
       } catch (error) {
         console.log(error);
@@ -23,7 +23,7 @@ export const handleFollowAndUnfollow = async (loggedInUser, id, dispatch) => {
       try {
         dispatch(setFollow(id));
         const res = await axios.post(`${FOLLOW}/${id}`,{},{ withCredentials: true,skipLoading: true });
-        toast.success(res.data.message);
+        // toast.success(res.data.message);
         console.log(res.data);
       } catch (error) {
         console.log(error);

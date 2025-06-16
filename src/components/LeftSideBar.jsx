@@ -47,11 +47,11 @@ const LeftSideBar = ({ isOpen, setIsOpen }) => {
       icon: <User />,
       onClick: () => user?._id && navigate(`/profile/${user._id}`),
     },
-    {
-      name: "More",
-      icon: <MoreHorizontal />,
-      onClick: () => navigate("/more"),
-    },
+    // {
+    //   name: "More",
+    //   icon: <MoreHorizontal />,
+    //   onClick: () => navigate("/more"),
+    // },
   ];
 
   return (
