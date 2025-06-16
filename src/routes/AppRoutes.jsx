@@ -23,6 +23,8 @@ const AppRoutes = () => {
       <Route path="/follower" element={<MainContent />} />
       <Route path="/following" element={<MainContent />} />
       <Route path="/liked" element={<MainContent />} />
+
+      
       <Route path="/editprofile" element={<UserProfile />} />
       <Route path="/profile/:id" element={<UserProfile />} />
       <Route path="/:id/followers" element={<UserProfile />} />

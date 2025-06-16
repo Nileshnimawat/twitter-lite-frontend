@@ -19,13 +19,6 @@ const App = () => {
   const socket = useSelector((state) => state.socket.socket);
    const loading = useSelector((state) => state.loading.isLoading);
 
-     const navigate = useNavigate();
-
-  useEffect(() => {
-   if(!loggedInUser){
-    navigate("/login");
-   }
-  }, [])
 
   useEffect(() => {
     if (loggedInUser) {
