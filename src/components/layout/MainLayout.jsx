@@ -11,13 +11,6 @@ import {
 const MainLayout = ({ children }) => {
   const loggedInUser = useSelector((state) => state.users.user);
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!loggedInUser) {
-      navigate("/");
-    }
-  }, []);
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 

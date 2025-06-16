@@ -1,14 +1,19 @@
 import Loader from "./components/layout/Loader"; // import the loader
-import { useSelector,useGetLoggedInUser,useGetAllUsers,useDispatch
-  ,useEffect, Toaster,useNavigate
- } from "./utility/libs"; 
+import {
+  useSelector,
+  useGetLoggedInUser,
+  useGetAllUsers,
+  useDispatch,
+  useEffect,
+  Toaster,
+  useNavigate,
+  useLocation,
+} from "./utility/libs";
 import AppRoutes from "./routes/AppRoutes";
-import io from "socket.io-client"
+import io from "socket.io-client";
 
 import { setSocket } from "./store/users/socketSlice";
 import { setOnlineUsers } from "./store/users/userSlice";
-
-
 
 const App = () => {
   useGetLoggedInUser();
@@ -17,15 +22,26 @@ const App = () => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.users.user);
   const socket = useSelector((state) => state.socket.socket);
-   const loading = useSelector((state) => state.loading.isLoading);
+  const loading = useSelector((state) => state.loading.isLoading);
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const isPublicRoute =
+    location.pathname === "/" ||
+    location.pathname === "/login" ||
+    location.pathname === "/register";
+
+  useEffect(() => {
+    if (!loggedInUser && !isPublicRoute) {
+      navigate("/");
+    }
+  }, [loggedInUser, location.pathname, navigate]);
 
   useEffect(() => {
     if (loggedInUser) {
       const socketInstance = io(import.meta.env.VITE_SOCKET_BACKEND_URL, {
-         transports: ["websocket"],
+        transports: ["websocket"],
         query: { userId: loggedInUser._id },
-        
       });
 
       dispatch(setSocket(socketInstance));
@@ -48,10 +64,9 @@ const App = () => {
 
   return (
     <>
-        {loading && <Loader fullScreen />}
+      {loading && <Loader fullScreen />}
       <AppRoutes />
       <Toaster />
-      
     </>
   );
 };
